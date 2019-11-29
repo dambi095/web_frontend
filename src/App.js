@@ -3,9 +3,8 @@ import styles from "./App.scss";
 
 class App extends Component {
     render() {
-        return  (
-            <div>
-                <h3>Hello</h3>
+        return (
+            <div className={styles.App}>
             </div>
         )
     }
