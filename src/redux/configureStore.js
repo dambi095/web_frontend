@@ -6,6 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { routerMiddleware, connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
+import { composeWithDevTools } from "redux-devtools-extension";
 import users from "./modules/user";
 
 // prod or dev 에 따라 스토어의 설정이 달라진다. 
@@ -31,10 +32,12 @@ const reducer = combineReducers({
     router: connectRouter(history) // routing: 불러온 router reducer
 })
 
-
+// ...middlewares 로 작성하면 array를 풀 수 있다.
 let store = initialState =>
-    // ...middlewares 로 작성하면 array를 풀 수 있다.
-    createStore(reducer, applyMiddleware(...middlewares));
+    createStore(
+        reducer,
+        composeWithDevTools(applyMiddleware(...middlewares))
+    );
 
 // history를 export 하는 이유는 곧 생성될 라우터에겐 히스토리 오브젝트가 필요하기 때문이다.
 export { history };
