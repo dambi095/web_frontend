@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from "../../node_modules/styled-components";
+import reset from "../../node_modules/styled-reset";
 
 // styled-components 의 최신 방식으로 만드는 global styles
 export default createGlobalStyle`

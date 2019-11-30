@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import { routerMiddleware, connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import { composeWithDevTools } from "redux-devtools-extension";
-import users from "./modules/user";
+import users from "./modules/User";
 
 // prod or dev 에 따라 스토어의 설정이 달라진다. 
 const env = process.env.NODE_ENV;
