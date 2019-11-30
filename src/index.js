@@ -3,23 +3,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import store, { history } from '../src/redux/configureStore';
-// import App from './App';
+import App from "./components/App";
 
-console.log(store.getState());
+// console.log(store.getState());
 
-function App() {
-    return (
-      <Provider store={store}>
+const rootElement = document.getElementById("root");
+
+ReactDOM.render(
+    <Provider store={store}>
         <ConnectedRouter history={history}>
-          <>
-            <h1>Hello CodeSandbox</h1>
-            <h2>Start editing to see some magic happen!</h2>
-          </>
+            <App />
         </ConnectedRouter>
-      </Provider>
-    );
-  }
-  
-  const rootElement = document.getElementById("root");
-  ReactDOM.render(<App />, rootElement);
-  
+    </Provider>
+    , rootElement
+);

@@ -29,7 +29,7 @@ if (env === "development") {
 // 여러개의 리듀서를 합치는 부분 
 const reducer = combineReducers({
     users,
-    router: connectRouter(history) // routing: 불러온 router reducer
+    router: connectRouter(history), // routing: 불러온 router reducer
 })
 
 // ...middlewares 로 작성하면 array를 풀 수 있다.
