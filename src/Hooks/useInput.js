@@ -2,7 +2,9 @@ import { useState } from "react";
 
 export default defaultValue => {
     const [value, setValue] = useState(defaultValue);
-    console.log("!!!!!!!!! ", defaultValue);
+    
+    // console.log("*-*-*-*-* search value:", value);
+    
     const onChange = e => {
         const {
             target: { value }

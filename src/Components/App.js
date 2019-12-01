@@ -24,10 +24,10 @@ export default () => {
                     <>
                     <Header/>
                         <Wrapper>
-                            <h2>Hello </h2>
-                            <Button text={"test text"}></Button>
-                            <Footer/>
+                            <h2>contents </h2>
                         </Wrapper>
+
+                        <Footer/>
                     </>
                 </Router>
                 <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
