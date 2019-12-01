@@ -25,9 +25,8 @@ export default () => {
                     <Header/>
                         <Wrapper>
                             <h2>contents </h2>
-                        </Wrapper>
-
                         <Footer/>
+                        </Wrapper>
                     </>
                 </Router>
                 <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
