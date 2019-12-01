@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "../../node_modules/react-toastify";
 import "../../node_modules/react-toastify/dist/ReactToastify.css";
 import Header from "./Header";
 import Footer from "./Footer";
-import Button from "./Button"
+import Button from "./Button";
 
 const Wrapper = styled.div`
   margin: 0 auto;
