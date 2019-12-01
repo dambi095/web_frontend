@@ -16,7 +16,7 @@ const Header = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px, 0px;
+    padding: 25px 0px;
 `;
 
 const HeaderWrapper = styled.div`
@@ -78,7 +78,7 @@ export default withRouter(({ history }) => {
                     </form>
                 </HeaderColumn>
                 <HeaderColumn>
-
+                
                 </HeaderColumn>
             </HeaderWrapper>
         </Header>

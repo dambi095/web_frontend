@@ -2,14 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const Footer = styled.footer`
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 6px;
-    border: 0;
-    background-color: white;
+    margin: 55px auto;
 `;
 
 const List = styled.ul`

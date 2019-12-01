@@ -2,9 +2,9 @@ import React from "../../node_modules/react";
 import styled, { ThemeProvider } from "../../node_modules/styled-components";
 import { HashRouter as Router } from "../../node_modules/react-router-dom";
 import GlobalStyles from "../Styles/GlobalStyles";
-import Theme from "../Styles/Theme";
 import { ToastContainer, toast } from "../../node_modules/react-toastify";
 import "../../node_modules/react-toastify/dist/ReactToastify.css";
+import Theme from "../Styles/Theme";
 import Header from "./Header";
 import Footer from "./Footer";
 import Button from "./Button";
@@ -22,10 +22,10 @@ export default () => {
                 <GlobalStyles />
                 <Router>
                     <>
-                    <Header/>
+                        <Header />
                         <Wrapper>
                             <h2>contents </h2>
-                        <Footer/>
+                            <Footer />
                         </Wrapper>
                     </>
                 </Router>
