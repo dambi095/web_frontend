@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 export default () => {
     const [action, setAction] = useState("logIn");
     const username = useInput("");
-    const firstName = useInput("");
-    const lastName = useInput("");
+    const password = useInput("");
     const email = useInput("");
     const secret = useInput("");
 
@@ -17,7 +16,9 @@ export default () => {
         if (action === "logIn") {
 
         } else if (action === "signUp") {
+            if(email.value !== "" && username.value !== "" && password.value !== ""){
 
+            }
         } else if (action === "confirm") {
 
         }
@@ -27,8 +28,7 @@ export default () => {
         setAction={setAction}
         action={action}
         username={username}
-        firstName={firstName}
-        lastName={lastName}
+        password={password}
         email={email}
         onSubmit={onSubmit}
         secret={secret}
