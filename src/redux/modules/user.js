@@ -1,8 +1,63 @@
 // imports
+import { API_URL } from "../../constants";
 
 // actions
+const LOG_IN = "LOG_IN";
+const LOG_OUT = "LOG_OUT";
+const SET_USER = "SET_USER";
+const SAVE_TOKEN = "SAVE_TOKEN";
 
 // action creators
+function setLogIn(token) {
+    return {
+        type: LOG_IN,
+        token
+    };
+}
+
+function logOut(user) {
+    return { type: LOG_OUT };
+}
+
+function setUser(user) {
+    return {
+        type: SET_USER,
+        user
+    };
+}
+
+function saveToken(token) {
+    return {
+        type: SAVE_TOKEN,
+        token
+    };
+}
+
+// API Actions
+function logIn(email, password) {
+    console.log(`login email : ${email} password : ${password}`);
+    return dispatch => {
+        return fetch(`${API_URL}/user/logIn`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        })
+            .then(response => response.json())
+            .then(json => {
+                console.log(JSON.stringify(json));
+                if (json.user) {
+                    return true
+                }
+            })
+
+    }
+}
+
 
 // initial state
 
@@ -13,16 +68,32 @@ const initialState = {
 }
 
 // reducer
-
 function reducer(state = initialState, action) {
-    switch (action) {
+    switch (action.type) {
+        case LOG_IN:
+            return applyLogIn(state, action);
         default:
             return state;
     }
 }
+
 // reducer funtions
+function applyLogIn(state, action) {
+    //console.log("===applyLogIn=============" + JSON.stringify(state));
+    const { token } = action;
+    return {
+        ...state,
+        isLoggedIn: true,
+        token
+    };
+}
 
 // exports
+const actionCreators = {
+    logIn
+};
+
+export { actionCreators };
 
 // reducer export 
 export default reducer;
