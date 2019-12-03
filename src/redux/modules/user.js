@@ -1,5 +1,3 @@
-// imports
-import { API_URL } from "../../constants";
 
 // actions
 const LOG_IN = "LOG_IN";
@@ -34,10 +32,33 @@ function saveToken(token) {
 }
 
 // API Actions
-function logIn(email, password) {
-    console.log(`login email : ${email} password : ${password}`);
+
+function signUp(email, password, username) {
+    console.log(`signUp email: ${email} password : ${password} username : ${username}`);
     return dispatch => {
-        return fetch(`${API_URL}/user/logIn`, {
+        return fetch('/user/inserUser',{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                username
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(" *-*-*-*-* signUp API result : ", result);
+     
+        })
+    }
+}
+
+function logIn(email, password) {
+    console.log(`login email : ${email} `);
+    return dispatch => {
+        return fetch(`/user/logIn`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -90,6 +111,7 @@ function applyLogIn(state, action) {
 
 // exports
 const actionCreators = {
+    signUp,
     logIn
 };
 

@@ -28,7 +28,7 @@ export default () => {
         isLoggedIn = store.users.isLoggedIn
 
     })
-
+// <button onClick={ () => {dispath(userActions.logIn(1234,12313))}}></button>
     return (
         <ThemeProvider theme={Theme}>
             <>
@@ -38,7 +38,6 @@ export default () => {
                         <Header />
                         <Wrapper>
                             <Routes isLoggedIn={isLoggedIn} />    
-                            <button onClick={ () => {dispath(userActions.logIn(1234,12313))}}></button>
                             <Footer />
                         </Wrapper>
                     </>
