@@ -7,6 +7,7 @@ import "../../node_modules/react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../Redux/modules/User";
 import Theme from "../Styles/Theme";
+import Routes from "./Routes";
 import Header from "./Header";
 import Footer from "./Footer";
 import Button from "./Button";
@@ -20,9 +21,12 @@ const Wrapper = styled.div`
 export default () => {
     const dispath = useDispatch();
 
+    let isLoggedIn 
     // redux hooks 를 이용하여 쉽게 props & state 를 가져올 수 있도록 
     const info = useSelector((store) => {
         console.log("*-*-*-*-*", store.users.isLoggedIn);
+        isLoggedIn = store.users.isLoggedIn
+
     })
 
     return (
@@ -33,7 +37,7 @@ export default () => {
                     <>
                         <Header />
                         <Wrapper>
-                            <h2>contents </h2>
+                            <Routes isLoggedIn={isLoggedIn} />    
                             <button onClick={ () => {dispath(userActions.logIn(1234,12313))}}></button>
                             <Footer />
                         </Wrapper>
