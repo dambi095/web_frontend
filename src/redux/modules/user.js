@@ -36,7 +36,7 @@ function saveToken(token) {
 function signUp(email, password, username) {
     console.log(`signUp email: ${email} password : ${password} username : ${username}`);
     return dispatch => {
-        return fetch('/user/inserUser',{
+        return fetch('/user/insertUser',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
