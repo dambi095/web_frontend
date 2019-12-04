@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { actionCreators as userActions } from "../../Redux/modules/User";
+import { generateSecret, sendSecretMail } from "../../utils";
 import { useSelector, useDispatch } from "react-redux";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
@@ -24,6 +25,14 @@ export default () => {
                 const isExisting = await dispatch(userActions.registerCheck(email.value));
 
                 if (isExisting === false) {
+                    const loginSecret = generateSecret();
+                    try{
+                        await sendSecretMail(email, loginSecret);
+                        
+                    }catch(e){
+                        console.log(e);
+                        return false;
+                    }
                     toast.success("입력된 이메일로 인증 단어를 전송하였습니다")
                     setTimeout(() => setAction("confirm"), 5000);
                 } else {
