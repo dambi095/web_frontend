@@ -22,12 +22,18 @@ export default () => {
         } else if (action === "signUp") {
             if (email.value !== "" && username.value !== "" && password.value !== "") {
                 try {
-                    dispatch(userActions.signUp(email.value,password.value,username.value))
+                    const signUpResult = await dispatch(userActions.signUp(email.value, password.value, username.value))
+                    if (signUpResult === true) {
+                        toast.success("회원가입에 성공했습니다! 로그인 창으로 이동합니다");
+                        setTimeout(() => setAction("logIn"),4000);
+                    } else {
+                        toast.error("다른 이메일을 입력해주세요");
+                    }
                 } catch (e) {
                     toast.error(e.message);
                 }
             } else {
-                toast.error("All field are required!");
+                toast.error("필드 항목들을 모두 입력해주세요");
             }
         } else if (action === "confirm") {
 
