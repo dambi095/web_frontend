@@ -31,8 +31,9 @@ function saveToken(token) {
     };
 }
 
-// API Actions
+/* API Actions */
 
+// 회원가입
 function signUp(email, password, username) {
     console.log(`signUp email: ${email} password : ${password} username : ${username}`);
     return dispatch => {
@@ -59,6 +60,31 @@ function signUp(email, password, username) {
     }
 }
 
+// 가입된 유저인지 체크하기 
+function registerCheck(email) {
+    console.log(`getUserInfo email: ${email}`);
+    return dispatch => {
+        return fetch('/user/registerCheck', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email
+            })
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+    }
+}
+
+// 로그인 하기 
 function logIn(email, password) {
     console.log(`login email : ${email} `);
     return dispatch => {
@@ -116,6 +142,7 @@ function applyLogIn(state, action) {
 // exports
 const actionCreators = {
     signUp,
+    registerCheck,
     logIn
 };
 

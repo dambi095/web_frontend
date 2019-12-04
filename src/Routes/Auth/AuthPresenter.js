@@ -22,11 +22,13 @@ const Box = styled.div`
 const StateChanger = styled(Box)`
     text-align: center;
     padding: 20px 0px;
+    font-size:14px;
 `;
 
 const Link = styled.span`
     color: ${props => props.theme.blueColor};
     cursor: pointer;
+    font-size:14px;
 `;
 
 const Form = styled(Box)`
@@ -54,35 +56,51 @@ export default ({ action, username, password, email, setAction, onSubmit, secret
                 <form onSubmit={onSubmit}>
                     <Input placeholder={"Email"} {...email} type="email" />
                     <Input placeholder={"Password"} {...password} type="password" />
-                    <Button text={"Log in"} />
+                    <Button text={"로그인"} />
+                </form>
+            )} {action === "emailAuthentication" && (
+                <form onSubmit={onSubmit}>
+                    <Input placeholder={"Email"} {...email} type="email" />
+                    <Button text={"인증 단어 전송"} />
                 </form>
             )} {action === "signUp" && (
                 <form onSubmit={onSubmit}>
                     <Input placeholder={"Email"} {...email} type="email" />
                     <Input placeholder={"Password"} {...password} type="password" />
                     <Input placeholder={"Username"} {...username} />
-                    <Button text={"Sign up"} />
+                    <Button text={"회원가입"} />
                 </form>
             )}
             {action === "confirm" &&
                 <form onSubmit={onSubmit}>
                     <Input placeholder="Paste your secret" required {...secret} />
-                    <Button text={"Confirm"} />
+                    <Button text={"인증 완료"} />
                 </form>}
         </Form>
         {action !== "confirm" &&
             <StateChanger>
                 {action === "logIn" ? (
                     <>
-                        Don't have an account?{" "}
-                        <Link onClick={() => setAction("signUp")}>Sign up</Link>
+                        회원가입 하시겠습니까?{" "}
+                        <Link onClick={() => setAction("emailAuthentication")}>회원가입</Link>
                     </>
                 ) : (
                         <>
-                            Have an account?{" "}
-                            <Link onClick={() => setAction("logIn")}>Log in</Link>
+                            로그인 하시겠습니까?{" "}
+                            <Link onClick={() => setAction("logIn")}>로그인</Link>
                         </>
-                    )}
+                    )} 
             </StateChanger>}
+            {action === "confirm" && 
+            <StateChanger>
+                {action === "confirm" ? (
+                        <>
+                            이메일을 잘못 입력하셨나요?{" "} 
+                            <Link onClick={() => {
+                                setAction("emailAuthentication")}}>이메일 재입력</Link>
+                        </>
+                    ) : null}
+            </StateChanger>
+        }
     </Wrapper>
 )

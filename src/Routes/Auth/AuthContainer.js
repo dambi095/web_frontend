@@ -19,13 +19,26 @@ export default () => {
         e.preventDefault();
         if (action === "logIn") {
 
+        } else if (action === "emailAuthentication") {
+            if (email.value !== "") {
+                const isExisting = await dispatch(userActions.registerCheck(email.value));
+
+                if (isExisting === false) {
+                    toast.success("입력된 이메일로 인증 단어를 전송하였습니다")
+                    setTimeout(() => setAction("confirm"), 5000);
+                } else {
+                    toast.error("이미 가입된 유저입니다");
+                }
+            } else {
+                toast.error("이메일 인증을 위한 이메일을 입력해주세요");
+            }
         } else if (action === "signUp") {
             if (email.value !== "" && username.value !== "" && password.value !== "") {
                 try {
                     const signUpResult = await dispatch(userActions.signUp(email.value, password.value, username.value))
                     if (signUpResult === true) {
                         toast.success("회원가입에 성공했습니다! 로그인 창으로 이동합니다");
-                        setTimeout(() => setAction("logIn"),4000);
+                        setTimeout(() => setAction("logIn"), 4000);
                     } else {
                         toast.error("다른 이메일을 입력해주세요");
                     }
