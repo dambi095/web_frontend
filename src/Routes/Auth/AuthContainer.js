@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { actionCreators as userActions } from "../../Redux/modules/User";
-import { generateSecret, sendSecretMail } from "../../utils";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
 import { toast } from "react-toastify";
@@ -20,36 +19,21 @@ export default () => {
         e.preventDefault();
         if (action === "logIn") {
 
-        } else if (action === "emailAuthentication") {
-            if (email.value !== "") {
-                const isExisting = await dispatch(userActions.registerCheck(email.value));
-
-                if (isExisting === false) {
-                    const loginSecret = generateSecret();
-                    try{
-                        await sendSecretMail(email, loginSecret);
-                        
-                    }catch(e){
-                        console.log(e);
-                        return false;
-                    }
-                    toast.success("입력된 이메일로 인증 단어를 전송하였습니다")
-                    setTimeout(() => setAction("confirm"), 5000);
-                } else {
-                    toast.error("이미 가입된 유저입니다");
-                }
-            } else {
-                toast.error("이메일 인증을 위한 이메일을 입력해주세요");
-            }
         } else if (action === "signUp") {
             if (email.value !== "" && username.value !== "" && password.value !== "") {
                 try {
-                    const signUpResult = await dispatch(userActions.signUp(email.value, password.value, username.value))
-                    if (signUpResult === true) {
-                        toast.success("회원가입에 성공했습니다! 로그인 창으로 이동합니다");
-                        setTimeout(() => setAction("logIn"), 4000);
+                    const registerCheck = await dispatch(userActions.registerCheck(email.value));
+                    console.log("registerCheck: ", registerCheck);
+                    if (registerCheck === true) {
+                        const signUpResult = await dispatch(userActions.signUp(email.value, password.value, username.value))
+                        if (signUpResult === true) {
+                            toast.success("인증번호가 전송되었습니다");
+                            setTimeout(() => setAction("confirm"), 4000);
+                        } else {
+                            toast.error("회원가입에 실패하였습니다");
+                        }
                     } else {
-                        toast.error("다른 이메일을 입력해주세요");
+                        toast.error("이미 가입한 이메일입니다");
                     }
                 } catch (e) {
                     toast.error(e.message);

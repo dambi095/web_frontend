@@ -75,7 +75,35 @@ function registerCheck(email) {
         })
             .then(response => response.json())
             .then(result => {
+                // 이미 존재할 시 
                 if (result > 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+    }
+}
+
+// 유저 정보 업데이트하기
+function updateUserInfo(email, phone, profile_img) {
+    console.log(`email ${email} phone ${phone} profile_img ${profile_img}`);
+    return dispatch => {
+        return fetch('/user/updateUserInfo', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                phone,
+                profile_img
+            })
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result > 0) {
+                    console.log("update 완료");
                     return true;
                 } else {
                     return false;
@@ -83,6 +111,7 @@ function registerCheck(email) {
             })
     }
 }
+
 
 // 로그인 하기 
 function logIn(email, password) {
@@ -143,6 +172,7 @@ function applyLogIn(state, action) {
 const actionCreators = {
     signUp,
     registerCheck,
+    updateUserInfo,
     logIn
 };
 

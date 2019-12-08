@@ -49,7 +49,7 @@ const Form = styled(Box)`
     }
 `
 
-export default ({ action, username, password, email, setAction, onSubmit, secret }) => (
+export default ({ action, username, password, email, setAction, onSubmit, secret}) => (
     <Wrapper>
         <Form>
             {action === "logIn" && (
@@ -57,11 +57,6 @@ export default ({ action, username, password, email, setAction, onSubmit, secret
                     <Input placeholder={"Email"} {...email} type="email" />
                     <Input placeholder={"Password"} {...password} type="password" />
                     <Button text={"로그인"} />
-                </form>
-            )} {action === "emailAuthentication" && (
-                <form onSubmit={onSubmit}>
-                    <Input placeholder={"Email"} {...email} type="email" />
-                    <Button text={"인증 단어 전송"} />
                 </form>
             )} {action === "signUp" && (
                 <form onSubmit={onSubmit}>
@@ -82,7 +77,7 @@ export default ({ action, username, password, email, setAction, onSubmit, secret
                 {action === "logIn" ? (
                     <>
                         회원가입 하시겠습니까?{" "}
-                        <Link onClick={() => setAction("emailAuthentication")}>회원가입</Link>
+                        <Link onClick={() => setAction("signUp")}>회원가입</Link>
                     </>
                 ) : (
                         <>
