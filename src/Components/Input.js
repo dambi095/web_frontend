@@ -12,7 +12,7 @@ const Container = styled.input`
     padding: 0px 15px;
 `;
 
-const Input = ({ placeholder, required = true, value, onChange, type = "text", className }) => (
+const Input = ({ placeholder, required = true, value, onChange, type = "text", className, readOnly = false }) => (
     <Container
         className={className}
         placeholder={placeholder}
@@ -20,6 +20,7 @@ const Input = ({ placeholder, required = true, value, onChange, type = "text", c
         value={value}
         onChange={onChange}
         type={type}
+        readOnly={readOnly}
     />
 );
 
@@ -28,7 +29,8 @@ Input.propTypes = {
     required: PropTypes.bool,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    type: PropTypes.string
+    type: PropTypes.string,
+    readOnly: PropTypes.bool
 };
 
 export default Input;

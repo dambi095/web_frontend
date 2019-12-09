@@ -60,6 +60,25 @@ function signUp(email, password, username) {
     }
 }
 
+// 이메일 인증번호 보내기 
+function sendEmail(email) {
+    return dispatch => {
+        return fetch('/user/sendEmail', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email
+            })
+        })
+            .then(response => response.json())
+            .then(result => {
+                return result.authKey;
+            })
+    }
+}
+
 // 가입된 유저인지 체크하기 
 function registerCheck(email) {
     console.log(`getUserInfo email: ${email}`);
@@ -77,9 +96,9 @@ function registerCheck(email) {
             .then(result => {
                 // 이미 존재할 시 
                 if (result > 0) {
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
             })
     }
@@ -98,6 +117,32 @@ function updateUserInfo(email, phone, profile_img) {
                 email,
                 phone,
                 profile_img
+            })
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result > 0) {
+                    console.log("update 완료");
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+    }
+}
+
+// 인증 번호 확인하기
+function confirmAuthCode(email, auth_key) {
+    console.log(`email ${email} login_secret ${auth_key}`);
+    return dispatch => {
+        return fetch('/user/confirmLoginSecret', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                auth_key
             })
         })
             .then(response => response.json())
@@ -173,6 +218,8 @@ const actionCreators = {
     signUp,
     registerCheck,
     updateUserInfo,
+    confirmAuthCode,
+    sendEmail,
     logIn
 };
 
